@@ -10,6 +10,7 @@ SRC	=	src/merge_str.c				\
 		src/my_putchar.c			\
 		src/my_putnbr.c				\
 		src/my_putstr.c				\
+		src/my_revstr.c 			\
 		src/my_strcat.c				\
 		src/my_strcmp.c				\
 		src/my_strcpy.c				\
@@ -22,12 +23,14 @@ NAME    =   libmy.a
 
 CC      =   gcc
 
-CFLAGS  =   -Wall -Werror -Wextra -I ../include
+override CFLAGS +=   -Wall -Werror -Wextra -I ../include
 
-all:$(NAME)
+TESTFLAGS	=	--coverage -lcriterion
 
 $(NAME):$(OBJ)
 	ar rc $(NAME) $(OBJ)
+
+all:$(NAME)
 
 clean:
 	rm -rf $(OBJ)
@@ -37,7 +40,7 @@ fclean: clean
 
 re:	fclean	all
 
-tests_run: CFLAGS= -Wall -Werror -Wextra --coverage -lcriterion -I ../include
+tests_run: CFLAGS += $(TESTFLAGS)
 
 tests_run: $(OBJ)
 	ar rc $(NAME) $(OBJ)

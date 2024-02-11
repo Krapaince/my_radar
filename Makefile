@@ -5,38 +5,50 @@
 ## makefile
 ##
 
-SRC_GEN		=	src/generator/generator.c				\
+SRC_GEN		=	src/script/generator/entities.c				\
+				src/script/generator/generator_toolbox.c	\
+				src/script/generator/generator.c			\
 
-SRC_MAIN	=	src/main.c								\
+SRC_MAIN	=	src/main.c									\
 
-SRC			=	src/simulation/traffic_simulation.c		\
-				src/simulation/simulation.c				\
-				src/script/load_aircraft.c				\
-				src/script/load_tower.c					\
-				src/script/load.c						\
-				src/script/error_entities.c				\
-				src/script/error.c						\
-				src/destroy_entities.c					\
-				src/csfml/create_window.c				\
-				src/csfml/init_destroy.c				\
-				src/csfml/event.c						\
-				src/simulation/aircraft/display.c		\
+SRC			=	src/simulation/traffic_simulation.c			\
+				src/simulation/simulation.c					\
+				src/simulation/aircraft/update_list.c		\
+				src/script/load_aircraft.c					\
+				src/script/load_tower.c						\
+				src/script/load.c							\
+				src/script/error_entities.c					\
+				src/script/error.c							\
+				src/destroy_entities.c						\
+				src/csfml/alloc_init_destroy.c				\
+				src/csfml/create_window.c					\
+				src/csfml/display.c							\
+				src/csfml/event.c							\
+				src/csfml/time_update.c						\
+				src/quadtree/alloc_destroy.c				\
+				src/quadtree/init.c							\
+				src/quadtree/quadtree.c						\
+				src/script/generator/generator_toolbox.c	\
 
-SRC_TEST	=	tests/lib/test_merge_str.c				\
-				tests/lib/test_my_getnbr.c				\
-				tests/lib/test_my_putchar.c				\
-				tests/lib/test_my_putnbr.c				\
-				tests/lib/test_my_putstr.c				\
-				tests/lib/test_my_strcat.c				\
-				tests/lib/test_my_strcmp.c				\
-				tests/lib/test_my_strcpy.c				\
-				tests/lib/test_my_strdup.c				\
-				tests/lib/test_my_strlen.c				\
-				tests/src/script/test_error_entities.c	\
-				tests/src/script/test_error.c			\
-				tests/src/script/test_load_aircraft.c	\
-				tests/src/script/test_load_tower.c		\
-				tests/src/test_destroy_entities.c		\
+SRC_TEST	=	tests/lib/test_merge_str.c					\
+				tests/lib/test_my_getnbr.c					\
+				tests/lib/test_my_putchar.c					\
+				tests/lib/test_my_putnbr.c					\
+				tests/lib/test_my_putstr.c					\
+				tests/lib/test_my_revstr.c					\
+				tests/lib/test_my_strcat.c					\
+				tests/lib/test_my_strcmp.c					\
+				tests/lib/test_my_strcpy.c					\
+				tests/lib/test_my_strdup.c					\
+				tests/lib/test_my_strlen.c					\
+				tests/src/script/test_error_entities.c		\
+				tests/src/script/test_error.c				\
+				tests/src/script/test_load_aircraft.c		\
+				tests/src/script/test_load_tower.c			\
+				tests/src/script/test_load.c				\
+				tests/src/test_destroy_entities.c			\
+				tests/src/quadtree/test_alloc_destroy.c		\
+				tests/src/quadtree/test_quadtree.c			\
 
 OBJ_GEN		=	$(SRC_GEN:.c=.o)
 
@@ -50,21 +62,23 @@ NAME		=	my_radar
 
 NAME_TESTS	=	unit_tests
 
+NAME_GENERATOR = generator
+
 CC			=	gcc
 
-CFLAGS		=	-Wall -Wextra -Werror -I ./include
+override CFLAGS	+=	-Wall -Wextra -Werror -I ./include
 
 LIBFLAGS	=	-L ./lib -lmy
 
-LIBSYSTEM	=	-lcsfml-graphics -lcsfml-window -lsfml-window -lsfml-graphics -lsfml-system -lcsfml-system -lm
+LIBSYSTEM	=	-lcsfml-graphics -lsfml-graphics -lcsfml-window -lsfml-window -lcsfml-system -lsfml-system -lm
 
 TESTFLAGS	=	-lcriterion --coverage
-
-all:$(NAME)
 
 $(NAME):$(OBJ_MAIN) $(OBJ_SRC)
 	make -C lib/
 	$(CC) $(OBJ_SRC) $(OBJ_MAIN) -o $(NAME) $(LIBFLAGS) $(LIBSYSTEM)
+
+all:$(NAME)
 
 clean:
 	make -C ./lib clean
@@ -72,19 +86,19 @@ clean:
 
 fclean: clean
 	make -C ./lib fclean
-	rm -f $(NAME) $(NAME_TESTS)
+	rm -f $(NAME) $(NAME_TESTS) $(NAME_GENERATOR)
 
 re:	fclean	all
 
-tests_run: CFLAGS = -Wall -Wextra -Werror --coverage -lcriterion -I ./include
+tests_run: CFLAGS += $(TESTFLAGS)
 
 tests_run:$(OBJ_SRC) $(OBJ_TESTS)
 	make -C ./lib tests_run
 	$(CC) $(OBJ_TESTS) $(OBJ_SRC) -o $(NAME_TESTS) $(LIBFLAGS) $(LIBSYSTEM) $(TESTFLAGS)
 	./unit_tests
 
-generator:
+generator:$(OBJ_GEN)
 	make -C ./lib
-	$(CC) $(OBJ_GEN) -o generator $(LIBFLAGS)
+	$(CC) $(OBJ_GEN) -o $(NAME_GENERATOR) $(LIBFLAGS)
 
 .PHONY:	all	clean	fclean	tests_run	generator

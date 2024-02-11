@@ -23,7 +23,7 @@ void usage(void)
     my_putstr("\t./radar [OPTION]\n\n", STDOUT_FILENO);
     my_putstr("OPTION:\n", STDOUT_FILENO);
     my_putstr("\t-h\t\tprint the usage and quit\n\n", STDOUT_FILENO);
-    my_putstr("USER INTERACTIONS:\n", STDOUT_FILENO);
+    my_putstr("USER INTERACTIONS: (possible every second)\n", STDOUT_FILENO);
     my_putstr("\t'L'\t\tenable/disabled hitboxes and areas\n", STDOUT_FILENO);
     my_putstr("\t'S'\t\tenable/disabled sprites", STDOUT_FILENO);
 }

@@ -7,5 +7,9 @@
 
 #ifndef SIMULATION_H_
     #define SIMULATION_H_
-    void display_aircraft(csfml_t *csfml, aircraft_t **aircraft);
+    int update_aircraft(aircraft_t **aircraft);
+    int loop_game(csfml_t *csfml, aircraft_t **aircraft, tower_t *tower,
+    char *filepath);
+    int launch_simulation(aircraft_t **aircraft, tower_t **tower, int dt_max,
+    char *filepath);
 #endif

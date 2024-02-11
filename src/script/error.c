@@ -38,7 +38,7 @@ int check_line(char *buffer, int *atot)
     }
     if (buffer[0] == 'T' && check_tower(buffer) == 84) {
         my_putstr(E_SCRIPT_TOWER, STDERR_FILENO);
-        err = 84;;
+        err = 84;
     }
     if (aircraft_after_tower(buffer, atot) == 84)
         err = 84;

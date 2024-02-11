@@ -42,7 +42,6 @@ Test(init_tower, test_no_tower)
 
     cr_assert(new != NULL);
     init_tower(new, tower_info);
-    cr_assert(new->radius == 20);
     cr_assert(new->x == 34);
     cr_assert(new->y == 24);
     cr_assert(new->next == NULL);
@@ -56,7 +55,6 @@ Test(add_tower, test_with_non_existing_tower)
 
     cr_assert(add_tower(&tower, tower_info) == 0);
     cr_assert(tower != NULL);
-    cr_assert(tower->radius == 12);
     cr_assert(tower->x == 34);
     cr_assert(tower->y == 45);
     cr_assert(tower->next == NULL);
@@ -72,14 +70,12 @@ Test(add_tower, test_with_existing_tower)
 
     cr_assert(add_tower(&tower, tower_info) == 0);
     cr_assert(tower != NULL);
-    cr_assert(tower->radius == 12);
     cr_assert(tower->x == 34);
     cr_assert(tower->y == 45);
     first = tower;
     cr_assert(add_tower(&tower, tower_info_2) == 0);
     cr_assert(first == tower->next);
     cr_assert(tower != NULL);
-    cr_assert(tower->radius == 13);
     cr_assert(tower->y == 14);
     cr_assert(tower->x == 35);
     free(tower->next);

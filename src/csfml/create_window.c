@@ -5,6 +5,8 @@
 ** create_window
 */
 
+#include "lib.h"
+#include "struct.h"
 #include "csfml.h"
 
 sfRenderWindow *create_window(unsigned int width, unsigned int height)
@@ -15,7 +17,7 @@ sfRenderWindow *create_window(unsigned int width, unsigned int height)
     video_mode.width = width;
     video_mode.height = height;
     video_mode.bitsPerPixel = 32;
-    window = sfRenderWindow_create(video_mode, "my_radar", 8, NULL);
-    sfRenderWindow_setFramerateLimit(window, 30);
+    window = sfRenderWindow_create(video_mode, "my_radar", MODE, NULL);
+    sfRenderWindow_setFramerateLimit(window, FPS);
     return (window);
 }

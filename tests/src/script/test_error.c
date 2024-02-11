@@ -7,9 +7,9 @@
 
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
+#include "lib.h"
 #include "struct.h"
 #include "script.h"
-#include "lib.h"
 #include "error.h"
 
 Test(aircraft_after_tower, test_with_aircraft_after_tower)

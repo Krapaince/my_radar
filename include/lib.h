@@ -17,6 +17,8 @@
     #include <unistd.h>
     #include <sys/stat.h>
     #include <fcntl.h>
+    #include <SFML/Graphics.h>
+    #include <SFML/System/Clock.h>
 
     //lib's function prototype
     int merge_str(char **s1, char *s2);
@@ -24,6 +26,7 @@
     void my_putchar(char c, int std);
     void my_putnbr(int nb, int std);
     void my_putstr(char const *str, int std);
+    char *my_revstr(char *str);
     char *my_strcat(char *dest, char const *src);
     int my_strcmp(char const *s1, char const *s2);
     char *my_strcpy(char *dest, char const *src);

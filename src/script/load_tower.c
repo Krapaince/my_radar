@@ -9,6 +9,7 @@
 #include "struct.h"
 #include "script.h"
 #include "error.h"
+#include "csfml.h"
 
 char *get_next_tower(FILE *script)
 {
@@ -38,6 +39,7 @@ void init_tower(tower_t *new, char *tower_info)
         i += 1 + len_nb(nb);
         ++n;
     }
+    new->radius = sqrt((new->radius * WIDTH * HEIGHT) / (100 * M_PI));
     new->next = NULL;
 }
 
@@ -49,7 +51,7 @@ int add_tower(tower_t **tower, char *tower_info)
         my_putstr(E_MALLOC, STDERR_FILENO);
         return (84);
     }
-    init_tower(new,tower_info);
+    init_tower(new, tower_info);
     if (*tower)
         new->next = *tower;
     *tower = new;

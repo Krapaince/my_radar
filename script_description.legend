@@ -11,8 +11,8 @@ Control towers:
 T x y radius
 | | |    |
 | | |    |-> The radius is a percentage depending on the size of the screen, this value must be between 0(exclue) and 100
-| | |-> Define the position on the y-axis, this value must be between 0 and 1920
-| |-> Define the position on the x-axis, this value must be between 0 and 1080
+| | |-> Define the position on the y-axis, this value must be between 0 and 1919
+| |-> Define the position on the x-axis, this value must be between 0 and 1079
 |-> Represent a controll tower
 
 Aircraft:
@@ -20,10 +20,10 @@ A x0 y0 x1 y1 V /_\t
 | |  |  |  |  |  |
 | |  |  |  |  |  |-> Time before the aircraft takes off is in second, this value is always greater than 0
 | |  |  |  |  |-> Define speed of the aircraft in pixel/second, the speed is always greater than 0
-| |  |  |  |-> Define the postion of the aircaft on the y-axis to the arrival
-| |  |  |-> Define the postion of the aircaft on the x-axis to the arrival
-| |  |-> Define the position of the aircraft on the y-axis to the departure
-| |-> Define the position of the aircraft on the x-axis to the departure
+| |  |  |  |-> Define the postion of the aircaft on the y-axis to the arrival (value between 0 and 1079)
+| |  |  |-> Define the postion of the aircaft on the x-axis to the arrival (value between 0 and 1919)
+| |  |-> Define the position of the aircraft on the y-axis to the departure (value between 0 and 1079)
+| |-> Define the position of the aircraft on the x-axis to the departure (value between 0 and 1919)
 |-> Represent an aircraft
 
 Entities: tower and aircraft

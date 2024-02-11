@@ -22,9 +22,19 @@
     void init_tower(tower_t *new, char *tower_info);
     int add_tower(tower_t **tower, char *tower_info);
     int load_tower(tower_t **tower, char *filepath);
-    int load_aircraft(aircraft_t **plane, char *filepath, int dt);
     int get_dt(char *buffer);
     void init_aircraft(aircraft_t *new, char *aircraft_info);
-    int add_aircraft(aircraft_t **plane, char *aircraft_info, int dt);
-    int load_aircraft(aircraft_t **plane, char *filepath, int dt);
+    int add_aircraft(aircraft_t **plane, char *aircraft_info, int dt,
+    int *dt_current);
+    int load_aircraft(aircraft_t **plane, char *filepath, int dt,
+    int *dt_current);
+    int load(aircraft_t **plane, tower_t **tower,
+    int *dt_current, char *filepath);
+
+    //Generator:
+    char *nb_to_str(int nb, char *res, bool re_init);
+    char *re_init_buffer(char *buffer, int len);
+    int random_range(int min, int max);
+    void generate_aircraft(FILE *script);
+    void generate_tower(FILE *script, int min, int max);
 #endif

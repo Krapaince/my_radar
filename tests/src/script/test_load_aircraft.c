@@ -49,7 +49,7 @@ Test(add_aircraft, test_with_a_good_dt)
     int dt = 3;
     aircraft_t *plane = NULL;
 
-    cr_assert(add_aircraft(&plane, aircraft_info, dt) == 0);
+    cr_assert(add_aircraft(&plane, aircraft_info, dt, NULL) == 0);
     cr_assert(plane->x0 == 234);
     cr_assert(plane->y0 == 134);
     cr_assert(plane->x1 == 532);
@@ -65,7 +65,7 @@ Test(add_aircraft, test_with_bad_dt)
     int dt = 2;
     aircraft_t *plane = NULL;
 
-    cr_assert(add_aircraft(&plane, aircraft_info, dt) == 0);
+    cr_assert(add_aircraft(&plane, aircraft_info, dt, NULL) == 0);
     cr_assert(plane == NULL);
 }
 
@@ -75,7 +75,7 @@ Test(load_aircraft, test_map_whithout_aircraft)
     aircraft_t *plane = NULL;
     int dt = 0;
 
-    cr_assert(load_aircraft(&plane, filepath, dt) == 0);
+    cr_assert(load_aircraft(&plane, filepath, dt, NULL) == 0);
     cr_assert(plane == NULL);
 }
 
@@ -85,7 +85,7 @@ Test(load_aircraft, test_map_with_aircraft)
     aircraft_t *plane = NULL;
     int dt = 3;
 
-    cr_assert(load_aircraft(&plane, filepath, dt) == 0);
+    cr_assert(load_aircraft(&plane, filepath, dt, NULL) == 0);
     cr_assert(plane != NULL);
     cr_assert(plane->next == NULL);
     cr_assert(plane->x0 == 34);
@@ -102,7 +102,7 @@ Test(load_aircraft, test_map_with_multiple_aircraft)
     aircraft_t *plane = NULL;
     int dt = 6;
 
-    cr_assert(load_aircraft(&plane, filepath, dt) == 0);
+    cr_assert(load_aircraft(&plane, filepath, dt, NULL) == 0);
     cr_assert(plane != NULL);
     cr_assert(plane->next != NULL);
     cr_assert(plane->next->next != NULL);
@@ -117,7 +117,7 @@ Test(load_aircraft, test_with_unaccessible_map)
     int dt = 0;
 
     cr_redirect_stderr();
-    cr_assert(load_aircraft(&plane, filepath, dt) == 84);
+    cr_assert(load_aircraft(&plane, filepath, dt, NULL) == 84);
     cr_assert_stderr_eq_str(E_OPEN);
     cr_assert(plane == NULL);
 }

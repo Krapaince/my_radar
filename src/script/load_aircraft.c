@@ -8,6 +8,7 @@
 #include "lib.h"
 #include "struct.h"
 #include "script.h"
+#include "csfml.h"
 #include "error.h"
 
 int get_dt(char *buffer)
@@ -23,15 +24,20 @@ int get_dt(char *buffer)
     return (dt);
 }
 
-int set_rotation_and_speed(aircraft_t *new)
+void set_rotation_and_speed(aircraft_t *new, float *angle)
 {
     float delta_x = new->x1 - new->x0;
     float delta_y = new->y1 - new->y0;
     float hypo = sqrt(pow(delta_x, 2) + pow(delta_y, 2));
-    float res = atan2(delta_y, delta_x) * 180 / M_PI + 90;
 
-    new->v_y = fabs(delta_y / hypo) * new->v_x;
-    new->v_x = fabs(delta_x / hypo) * new->v_x;
+    *angle = atan2(delta_y, delta_x) * 180 / M_PI + 90;
+    if (hypo != 0) {
+        new->v_y = (fabs(delta_y / hypo) * new->v_x) / FPS;
+        new->v_x = (fabs(delta_x / hypo) * new->v_x) / FPS;
+    } else {
+        new->v_x = 0;
+        new->v_y = 0;
+    }
     if (new->x1 < new->x0) {
         new->x = 1;
         new->v_x *= -1;
@@ -40,7 +46,6 @@ int set_rotation_and_speed(aircraft_t *new)
         new->y = 1;
         new->v_y *= -1;
     }
-    return (res);
 }
 
 void init_aircraft(aircraft_t *new, char *aircraft_info)
@@ -52,36 +57,44 @@ void init_aircraft(aircraft_t *new, char *aircraft_info)
     &new->x0, &new->y0, &new->x1, &new->y1, &new->v_x, &new->delta_time};
 
     while (n < 6) {
-        nb = (int)my_getnbr(&aircraft_info[i]);
+        nb = my_getnbr(&aircraft_info[i]);
         *int_selector[n] = nb;
         i += 1 + len_nb(nb);
         ++n;
     }
+    new->width = 20;
+    new->height = 20;
+    new->destroy = 0;
     new->next = NULL;
-    new->angle = set_rotation_and_speed(new);
+    new->qtree_next = NULL;
+    set_rotation_and_speed(new, &new->angle);
+    new->angle = 0;
 }
 
-int add_aircraft(aircraft_t **plane, char *aircraft_info, int dt)
+int add_aircraft(aircraft_t **plane, char *aircraft_info, int dt, int *dt_max)
 {
-    aircraft_t *new = NULL;;
+    aircraft_t *new = NULL;
+    int dt_current = get_dt(aircraft_info);
 
-    if (dt != get_dt(aircraft_info))
-        return (0);
-    new = malloc(sizeof(aircraft_t));
-    if (!new) {
-        my_putstr(E_MALLOC, STDERR_FILENO);
-        return (84);
-    }
-    new->x = 0;
-    new->y = 0;
-    init_aircraft(new, aircraft_info);
-    if (*plane)
-        new->next = *plane;
-    *plane = new;
+    if (dt_max && *dt_max < dt_current)
+        *dt_max = dt_current;
+    if (dt == dt_current) {
+        new = malloc(sizeof(aircraft_t));
+        if (!new) {
+            my_putstr(E_MALLOC, STDERR_FILENO);
+            return (84);
+        }
+        new->x = 0;
+        new->y = 0;
+        init_aircraft(new, aircraft_info);
+        if (*plane)
+            new->next = *plane;
+        *plane = new;
+        }
     return (0);
 }
 
-int load_aircraft(aircraft_t **plane, char *filepath, int dt)
+int load_aircraft(aircraft_t **plane, char *filepath, int dt, int *dt_max)
 {
     FILE *script = fopen(filepath, "r");
     char *aircraft_info = NULL;
@@ -93,8 +106,8 @@ int load_aircraft(aircraft_t **plane, char *filepath, int dt)
         return (84);
     }
     r_getline = getline(&aircraft_info, &n, script);
-    while(r_getline != -1 && aircraft_info[0] == 'A') {
-        if (add_aircraft(plane, aircraft_info, dt) == 84) {
+    while (r_getline != -1 && aircraft_info[0] == 'A') {
+        if (add_aircraft(plane, aircraft_info, dt, dt_max) == 84) {
             my_putstr(E_LOAD_AIRCRAFT_ADD, STDERR_FILENO);
             return (84);
         }

@@ -11,17 +11,17 @@
 #include "script.h"
 #include "error.h"
 
-int load(aircraft_t **plane, tower_t **tower, int dt, char *filepath)
+int load(aircraft_t **plane, tower_t **tower, int *dt_current, char *filepath)
 {
-    if (dt == 0 && error_script(filepath) == 84) {
+    if (error_script(filepath) == 84) {
         my_putstr(E_SCRIPT, STDERR_FILENO);
         return (84);
     }
-    if (dt == 0 && load_tower(tower, filepath) == 84) {
+    if (load_tower(tower, filepath) == 84) {
         my_putstr(E_LOAD_TOWER, STDERR_FILENO);
         return (84);
     }
-    if (load_aircraft(plane, filepath, dt) == 84) {
+    if (load_aircraft(plane, filepath, 0, dt_current) == 84) {
         my_putstr(E_LOAD_AIRCRAFT, STDERR_FILENO);
         return (84);
     }
