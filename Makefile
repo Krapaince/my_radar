@@ -31,7 +31,7 @@ SRC			=	src/simulation/traffic_simulation.c			\
 				src/quadtree/init.c							\
 				src/quadtree/quadtree.c						\
 				src/quadtree/toolbox.c						\
-				src/script/generator/generator_toolbox.c	\
+				src/script/generator/generator_toolbox.c
 
 SRC_TEST	=	tests/lib/test_merge_str.c					\
 				tests/lib/test_my_getnbr.c					\
@@ -50,7 +50,7 @@ SRC_TEST	=	tests/lib/test_merge_str.c					\
 				tests/src/script/test_load_tower.c			\
 				tests/src/script/test_load.c				\
 				tests/src/test_destroy_entities.c			\
-				tests/src/quadtree/test_alloc_destroy.c		\
+				tests/src/quadtree/test_alloc_destroy.c
 
 OBJ_GEN		=	$(SRC_GEN:.c=.o)
 
@@ -84,7 +84,7 @@ all:$(NAME)
 
 clean:
 	make -C ./lib clean
-	rm -rf $(OBJ_TESTS) $(OBJ_MAIN) $(OBJ_SRC) $(OBJ_GEN)
+	rm -rf $(OBJ_TESTS) $(OBJ_MAIN) $(OBJ_SRC) $(OBJ_GEN) $(OBJ_SRC:.o=.gcno) $(OBJ_SRC:.o=.gcda) $(OBJ_TESTS:.o=.gcno) $(OBJ_TESTS:.o=.gcda)
 
 fclean: clean
 	make -C ./lib fclean

@@ -34,7 +34,7 @@ $(NAME):$(OBJ)
 all:$(NAME)
 
 clean:
-	rm -rf $(OBJ)
+	rm -rf $(OBJ) $(OBJ:.o=.gcno) $(OBJ:.o=.gcda)
 
 fclean: clean
 	rm -f $(NAME)
