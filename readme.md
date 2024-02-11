@@ -25,7 +25,7 @@
 - The red circle represents control tower area
 
   The colors of the aircraft and the rectangle grid indicate the depth of the element in the quadtree
-  
+
 | Depth | Color   |
 |-------|---------|
 | 0     | Green   |
@@ -48,8 +48,8 @@
 |             3           |       |    ON       |          |   3 - Default |  ON     |   ON     |
 |             4           |       |    ON       |   ON     |
 |             5           |       |             |   ON     |
-|             6 - Default |       |             |          |
-|             7           |  ON   |    ON       |   ON     |
+|             6           |       |             |          |
+|             7 - Default |  ON   |    ON       |   ON     |
 ### When
 
 This project was done in 2018 during my first school year.

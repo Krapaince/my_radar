@@ -65,7 +65,7 @@ int init_csfml(csfml_t *csfml)
     csfml->time.microseconds = 0;
     csfml->height = HEIGHT;
     csfml->widht = WIDTH;
-    csfml->hitbox = 6;
+    csfml->hitbox = 7;
     csfml->hitbox_active_switch = true;
     csfml->sprite = 3;
     csfml->sprite_active_switch = true;
