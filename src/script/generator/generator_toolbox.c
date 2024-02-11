@@ -9,7 +9,7 @@
 
 int random_range(int min, int max)
 {
-    int nb = rand() % max + min;
+    int nb = rand() % (max + 1 - min) + min;
 
     return (nb);
 }

@@ -11,33 +11,49 @@
 #include "quadtree.h"
 #include "error.h"
 
-void reset_root(qtree_t *root)
-{
-    root->slot = NULL;
-    root->depth = 0;
-    root->divided = false;
-    root->nb_aircraft = 0;
-}
-
-bool qtree(aircraft_t *aircraft, qtree_t *root)
+void reset_tree(qtree_t *tree)
 {
     int i = 0;
 
-    if (!root) {
-        my_putstr(E_MALLOC, STDERR_FILENO);
-        return (false);
-    }
-    if (root->divided) {
+    if (tree->depth < MAX_DEPTH) {
         while (i < 4) {
-            qtree_destroy(root->child[i]);
+            reset_tree(tree->child[i]);
             ++i;
         }
     }
-    reset_root(root);
+    tree->slot = NULL;
+    tree->divided = false;
+    tree->nb_aircraft = 0;
+}
+
+void crash_them_all(qtree_t *tree)
+{
+    qtree_compare_list(tree->slot);
+    while (tree->slot) {
+        qtree_compare_aircraft_child(tree->slot, tree, false);
+        tree->slot = tree->slot->qtree_next;
+    }
+    if (tree->divided) {
+        crash_them_all(tree->child[0]);
+        crash_them_all(tree->child[1]);
+        crash_them_all(tree->child[2]);
+        crash_them_all(tree->child[3]);
+    }
+}
+
+bool qtree(aircraft_t *aircraft, qtree_t *root, tower_t *tower)
+{
+    reset_tree(root);
     while (aircraft != NULL) {
-        if (!qtree_insert(aircraft, root))
-            return (false);
+        if (aircraft_in_tower_range(aircraft, tower))
+            aircraft->depth = 6;
+        else if (!qtree_insert(aircraft, root)) {
+            aircraft->qtree_next = root->slot;
+            aircraft->depth = root->depth;
+            root->slot = aircraft;
+        }
         aircraft = aircraft->next;
     }
+    crash_them_all(root);
     return (true);
 }

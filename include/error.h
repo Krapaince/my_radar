@@ -31,5 +31,4 @@
     #define E_SCRIPT_ATA         "Aircraft description after tower\n"
     #define E_LINE               ": error at this line of the script\n"
     #define E_QTREE              "Error quadtree\n"
-    #define E_QTREE_INSERT       "Error can't insert in child\n"
 #endif

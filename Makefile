@@ -23,11 +23,14 @@ SRC			=	src/simulation/traffic_simulation.c			\
 				src/csfml/alloc_init_destroy.c				\
 				src/csfml/create_window.c					\
 				src/csfml/display.c							\
+				src/csfml/display_entities.c				\
 				src/csfml/event.c							\
 				src/csfml/time_update.c						\
 				src/quadtree/alloc_destroy.c				\
+				src/quadtree/collision_detection.c			\
 				src/quadtree/init.c							\
 				src/quadtree/quadtree.c						\
+				src/quadtree/toolbox.c						\
 				src/script/generator/generator_toolbox.c	\
 
 SRC_TEST	=	tests/lib/test_merge_str.c					\
@@ -48,7 +51,6 @@ SRC_TEST	=	tests/lib/test_merge_str.c					\
 				tests/src/script/test_load.c				\
 				tests/src/test_destroy_entities.c			\
 				tests/src/quadtree/test_alloc_destroy.c		\
-				tests/src/quadtree/test_quadtree.c			\
 
 OBJ_GEN		=	$(SRC_GEN:.c=.o)
 

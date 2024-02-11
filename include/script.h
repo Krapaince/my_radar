@@ -35,6 +35,6 @@
     char *nb_to_str(int nb, char *res, bool re_init);
     char *re_init_buffer(char *buffer, int len);
     int random_range(int min, int max);
-    void generate_aircraft(FILE *script);
+    void generate_aircraft(FILE *script, generator_t *generator);
     void generate_tower(FILE *script, int min, int max);
 #endif

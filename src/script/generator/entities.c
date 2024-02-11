@@ -24,7 +24,7 @@ void generate_tower(FILE *script, int min, int max)
     fwrite(buffer, sizeof(char), my_strlen(buffer), script);
 }
 
-void generate_aircraft(FILE *script)
+void generate_aircraft(FILE *script, generator_t *gen)
 {
     int i = 0;
     char buffer[5] = {'\0'};
@@ -39,9 +39,9 @@ void generate_aircraft(FILE *script)
         fwrite(" ", sizeof(char), 1, script);
         ++i;
     }
-    my_revstr(nb_to_str(random_range(1, 100), buffer, true));
+    my_revstr(nb_to_str(random_range(gen->v_min, gen->v_max), buffer, true));
     fwrite(buffer, sizeof(char), my_strlen(buffer), script);
     fwrite(" ", sizeof(char), 1, script);
-    my_revstr(nb_to_str(random_range(0, 10), buffer, true));
+    my_revstr(nb_to_str(random_range(gen->dt_min, gen->dt_max), buffer, true));
     fwrite(buffer, sizeof(char), my_strlen(buffer), script);
 }

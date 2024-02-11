@@ -9,7 +9,7 @@
     #define CSFML_H_
     #define WIDTH  1920
     #define HEIGHT 1080
-    #define MODE   7
+    #define MODE   8
     #define FPS    30
     #define AIRCRAFT_FILEPATH   "resources/aircraft.png"
     #define BACKGROUND_FILEPATH "resources/background.png"

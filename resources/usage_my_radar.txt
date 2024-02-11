@@ -1,0 +1,36 @@
+Air traffic simulation panel
+
+USAGE:
+    ./radar [OPTION]
+
+OPTION:
+    -h          print the usage and quit
+    filepath    launch the simulation
+
+USER INTERACTIONS: (avaible every second)
+    'L'         enable/disabled hitboxes and areas
+    'S'         enable/disabled sprites
+    'B'         enable/disabled background
+
+            Hitboxes and areas | tower | aircraft | quadtree
+            -------------------|-------|----------|---------
+                    0          |  ON   |          |
+                    1          |  ON   |          |   ON
+                    2          |  ON   |    ON    |
+                    3          |       |    ON    |
+                    4          |       |    ON    |   ON
+                    5          |       |          |   ON
+    Default:        6          |       |          |
+                    7          |  ON   |    ON    |   ON
+
+
+                 Sprites       | tower | aircraft
+                 --------------------------------
+                     0         |       |
+                     1         |  ON   |
+                     2         |       |   ON
+    Default          3         |  ON   |   ON
+
+SCRIPT GENERATION:
+    make generator
+    ./generator -h

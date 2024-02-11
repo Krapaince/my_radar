@@ -30,6 +30,7 @@
         bool y;
         float angle;
         int destroy;
+        int depth;
         struct aircraft *qtree_next;
         struct aircraft *next;
     } aircraft_t;
@@ -59,6 +60,8 @@
         bool hitbox_active_switch;
         int sprite;
         bool sprite_active_switch;
+        int back;
+        bool back_active_switch;
         int dt;
         int dt_max;
         int sec;
@@ -78,4 +81,15 @@
         float height;
         bool divided;
     } qtree_t;
+    typedef struct
+    {
+        int nb_air;
+        int dt_min;
+        int dt_max;
+        int v_min;
+        int v_max;
+        int nb_tow;
+        int r_min;
+        int r_max;
+    } generator_t;
 #endif

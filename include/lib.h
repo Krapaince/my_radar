@@ -21,6 +21,7 @@
     #include <SFML/System/Clock.h>
 
     //lib's function prototype
+    int cat(char *filepath, int std);
     int merge_str(char **s1, char *s2);
     int my_getnbr(char const *str);
     void my_putchar(char c, int std);

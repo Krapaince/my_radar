@@ -67,6 +67,7 @@ void init_aircraft(aircraft_t *new, char *aircraft_info)
     new->destroy = 0;
     new->next = NULL;
     new->qtree_next = NULL;
+    new->depth = 0;
     set_rotation_and_speed(new, &new->angle);
     new->angle = 0;
 }

@@ -23,16 +23,22 @@ char *int_to_str(int nb)
     return (res);
 }
 
+void reset_switch(csfml_t *csfml)
+{
+    csfml->hitbox_active_switch = true;
+    csfml->sprite_active_switch = true;
+    csfml->back_active_switch = true;
+}
+
 bool time_update(csfml_t *csfml)
 {
     char *buffer_time = NULL;
 
     csfml->time = sfClock_getElapsedTime(csfml->timer);
     if (1000000 <= csfml->time.microseconds) {
-        csfml->hitbox_active_switch = true;
-        csfml->sprite_active_switch = true;
         ++csfml->dt;
         sfClock_restart(csfml->timer);
+        reset_switch(csfml);
         csfml->sec = 1;
     } else
         csfml->sec = 0;

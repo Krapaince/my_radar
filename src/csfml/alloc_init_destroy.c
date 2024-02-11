@@ -70,6 +70,8 @@ int init_csfml(csfml_t *csfml)
     csfml->sprite = 3;
     csfml->sprite_active_switch = true;
     csfml->dt = 0;
+    csfml->back = false;
+    csfml->back_active_switch = true;
     csfml->sec = 0;
     return (r_value);
 }

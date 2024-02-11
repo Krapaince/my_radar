@@ -16,10 +16,12 @@
 int loop_game(csfml_t *csfml, aircraft_t **aircraft, tower_t *tower,
 char *filepath)
 {
-    qtree_t *root = qtree_create(0, 0, WIDTH, HEIGHT);
+    qtree_t *root = qtree_create();
 
+    if (!root)
+        return (84);
     while (sfRenderWindow_isOpen(csfml->window)) {
-        if (!qtree(*aircraft, root)) {
+        if (!qtree(*aircraft, root, tower)) {
             my_putstr(E_QTREE, STDERR_FILENO);
             return (84);
         }
@@ -31,6 +33,7 @@ char *filepath)
         update_aircraft(aircraft);
         event_check(csfml, csfml->event, *aircraft);
     }
+    qtree_destroy(root);
     return (0);
 }
 

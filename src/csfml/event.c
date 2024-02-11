@@ -32,5 +32,9 @@ void event_check(csfml_t *csfml, sfEvent *event, aircraft_t *aircraft)
             switch_value(&csfml->sprite, 3);
             csfml->sprite_active_switch = false;
         }
+        if (event->key.code == sfKeyB && csfml->back_active_switch) {
+            csfml->back_active_switch = false;
+            switch_value(&csfml->back, 1);
+        }
     }
 }

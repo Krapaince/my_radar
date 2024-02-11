@@ -7,10 +7,10 @@
 
 #include "lib.h"
 #include "struct.h"
+#include "csfml.h"
 
-int aircraft_in_tower_range(aircraft_t *aircraft, tower_t *tower)
+bool aircraft_in_tower_range(aircraft_t *aircraft, tower_t *tower)
 {
-    int range = 0;
     float delta_x = 0;
     float delta_y = 0;
 
@@ -18,18 +18,23 @@ int aircraft_in_tower_range(aircraft_t *aircraft, tower_t *tower)
         delta_x = tower->x - (aircraft->x0 + aircraft->width / 2);
         delta_y = tower->y - (aircraft->y0 + aircraft->height / 2);
         if (pow(delta_x, 2) + pow(delta_y, 2) <= pow(tower->radius, 2))
-            return (1);
+            return (true);
         tower = tower->next;
     }
-    return (0);
+    return (false);
 }
 
 void collision_detection(aircraft_t *one, aircraft_t *two)
 {
-    if (one->x0 < two->x0 + two->width
-    && one->x0 + one->width > two->x0
-    && one->y0 < two->y + two->height
-    && one->y0 + one->height > two->y0) {
+    sfVector2f delta =
+    {fabs(one->x0 + one->width / 2 - (two->x0 + two->width / 2)),
+    fabs(two->y0 + two->height / 2 - (one->y0 + one->height / 2))};
+    sfVector2f size = {
+    (one->width + two->width) / 2,
+    (one->height + two->height) / 2};
+
+    if (delta.x <= size.x
+    && delta.y <= size.y) {
         one->destroy = 1;
         two->destroy = 1;
     }

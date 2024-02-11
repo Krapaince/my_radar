@@ -5,7 +5,8 @@
 ## makefile
 ##
 
-SRC	=	src/merge_str.c				\
+SRC	=	src/cat.c					\
+		src/merge_str.c				\
 		src/my_getnbr.c				\
 		src/my_putchar.c			\
 		src/my_putnbr.c				\
