@@ -9,17 +9,23 @@ HELP:
     -h                  printf the usage and quit
 
 OPTION: the option must be sort in the following order
-    name                (1) name of the script
-    number_aircraft     (2) number of aircraft to generate
-    delta_t_min         (3) the minimum time before an aircraft take off
-    delta_t_max         (4) the maximum time before an aircraft take off
-    speed_min           (5) minimal speed of an aircraft
-    speed_max           (6) maximum speed of an aircraft
-    number_tower        (7) number of tower
-    radius_min          (8) minimal radius of a tower
-    radius_max          (9) maximal radius of a tower
-    (0 <= number_aircraft)
-    (0 <= delta_t_min <= delta_t_max)
-    (0 < speed_min <= speed_max)
-    (0 <= number_tower)
-    (0 <= radius_min <= radius_max)
+                                                                                | Default
+    AIRCRAFT:                                                                   |
+        -n --name           Output file name                                    | my_radar_script
+        -a --aircraft       Number 0f aircraft                                  | 100
+        --dt_a_min          The minimum of time before an aircraft take off     | 0
+        --dt_a_max          The minimum time before an aircraft take off        | 10
+        --speed_min         Minimal speed of an aircraft                        | 10
+        --speed_max         Maximum speed of an aircraft                        | 100
+                                                                                |
+    TOWER                                                                       |
+        -t --tower          Number of tower                                     | 0
+        --radius_min        Minimal radius of a tower                           | 5
+        --radius_max        Maximal radius of a tower                           | 10
+
+NOTE:
+    0 <= number_aircraft
+    0 <= delta_t_min <= delta_t_max
+    0 < speed_min <= speed_max
+    0 <= number_tower
+    0 <= radius_min <= radius_max
