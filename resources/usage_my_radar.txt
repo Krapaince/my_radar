@@ -31,6 +31,15 @@ USER INTERACTIONS: (avaible every second)
                      2         |       |   ON
     Default          3         |  ON   |   ON
 
+DESCRIPTION:
+    Aircraft and quadtree color: the color indicate the depth of the element
+    Depth | Color
+      0   | Green
+      1   | Cyan
+      2   | Blue
+      3   | Magenta
+      4   | Orange
+
 SCRIPT GENERATION:
     make generator
     ./generator -h
