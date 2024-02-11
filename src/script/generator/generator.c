@@ -12,9 +12,9 @@
 
 bool error(generator_t *gen)
 {
-    if (gen->nb_air < 0 || gen->nb_tow < 0 || gen->dt_min < 0
-    || gen->dt_max < gen->dt_min || gen->v_min <= 0 || gen->v_max < gen->v_min
-    || gen->r_min < 0 || gen->r_max < gen->r_min) {
+    if (gen->nb_air < 0 || gen->nb_tow < 0 || gen->dt_min < 0 ||
+        gen->dt_max < gen->dt_min || gen->v_min <= 0 ||
+        gen->v_max < gen->v_min || gen->r_min < 0 || gen->r_max < gen->r_min) {
         my_putstr("Error in input param\n", STDERR_FILENO);
         return (false);
     }
@@ -24,7 +24,7 @@ bool error(generator_t *gen)
 bool get_param(generator_t *gen, char **ag)
 {
     int *gen_init[] = {&gen->nb_air, &gen->dt_min, &gen->dt_max, &gen->v_min,
-    &gen->v_max, &gen->nb_tow, &gen->r_min, &gen->r_max};
+        &gen->v_max, &gen->nb_tow, &gen->r_min, &gen->r_max};
     int i = 0;
 
     while (i < 8) {
@@ -58,11 +58,10 @@ int main(int ac, char **ag)
     generator_t generator = {0, 0, 0, 0, 0, 0, 0, 0};
 
     if (ac != 10 && ac != 2) {
-        cat("resources/error.txt", STDERR_FILENO);
-        return (84);
+        return (cat("resources/error.txt", STDERR_FILENO));
     } else if (ac == 2 && my_strcmp(ag[1], "-h") == 0)
         return (cat("resources/usage_generator.txt", STDOUT_FILENO));
-    script = fopen(ag[1], "a");
+    script = fopen(ag[1], "w");
     if (!script || !get_param(&generator, ag))
         return (84);
     srand(time(NULL));
