@@ -7,5 +7,6 @@
 
 int main(int ac, char **ag)
 {
-
+    if (ac != 3)
+        return (0);
 }

@@ -7,6 +7,9 @@
 
 SRC	=	src/merge_str.c				\
 		src/my_getnbr.c				\
+		src/my_putchar.c			\
+		src/my_putnbr.c				\
+		src/my_putstr.c				\
 		src/my_strcat.c				\
 		src/my_strcmp.c				\
 		src/my_strcpy.c				\
@@ -34,7 +37,8 @@ fclean: clean
 
 re:	fclean	all
 
-tests_run:
-	make CFLAGS="-Wall -Werror -Wextra --coverage -I ../include"
+tests_run: CFLAGS= -Wall -Werror -Wextra --coverage -lcriterion -I ../include
 
+tests_run: $(OBJ)
+	ar rc $(NAME) $(OBJ)
 .PHONY:	all	clean	fclean	tests_run

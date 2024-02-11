@@ -10,9 +10,9 @@ The y-axis evolve from top to bot. ( | )
 Control towers:
 T x y radius
 | | |    |
-| | |    |-> The radius is a percentage depending on the size of the screen, this value is always greater than 0
-| | |-> Define the position on the y-axis
-| |-> Define the position on the x-axis
+| | |    |-> The radius is a percentage depending on the size of the screen, this value must be between 0(exclue) and 100
+| | |-> Define the position on the y-axis, this value must be between 0 and 1920
+| |-> Define the position on the x-axis, this value must be between 0 and 1080
 |-> Represent a controll tower
 
 Aircraft:
@@ -27,6 +27,7 @@ A x0 y0 x1 y1 V /_\t
 |-> Represent an aircraft
 
 Entities: tower and aircraft
+Each parameters (x, y, radius...) and the name of each entities are separated by ' ' (space character).
 Each entities are separated by a '\n' character.
 The tower position must be in the screen.
 The aircraft must land off and land on in the screen.

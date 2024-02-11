@@ -5,19 +5,38 @@
 ## makefile
 ##
 
-SRC_GEN		=	src/generator/generator.c		\
+SRC_GEN		=	src/generator/generator.c				\
 
-SRC_MAIN	=	src/main.c						\
+SRC_MAIN	=	src/main.c								\
 
-SRC			=	src/init.c						\
-				src/color_smooth_random.c		\
+SRC			=	src/simulation/traffic_simulation.c		\
+				src/simulation/simulation.c				\
+				src/script/load_aircraft.c				\
+				src/script/load_tower.c					\
+				src/script/load.c						\
+				src/script/error_entities.c				\
+				src/script/error.c						\
+				src/destroy_entities.c					\
+				src/csfml/create_window.c				\
+				src/csfml/init_destroy.c				\
+				src/csfml/event.c						\
+				src/simulation/aircraft/display.c		\
 
-SRC_TEST	=	tests/lib/test_merge_str.c		\
-				tests/lib/test_my_getnbr.c		\
-				tests/lib/test_my_strcat.c		\
-				tests/lib/test_my_strcmp.c		\
-				tests/lib/test_my_strcpy.c		\
-				tests/lib/test_my_strlen.c		\
+SRC_TEST	=	tests/lib/test_merge_str.c				\
+				tests/lib/test_my_getnbr.c				\
+				tests/lib/test_my_putchar.c				\
+				tests/lib/test_my_putnbr.c				\
+				tests/lib/test_my_putstr.c				\
+				tests/lib/test_my_strcat.c				\
+				tests/lib/test_my_strcmp.c				\
+				tests/lib/test_my_strcpy.c				\
+				tests/lib/test_my_strdup.c				\
+				tests/lib/test_my_strlen.c				\
+				tests/src/script/test_error_entities.c	\
+				tests/src/script/test_error.c			\
+				tests/src/script/test_load_aircraft.c	\
+				tests/src/script/test_load_tower.c		\
+				tests/src/test_destroy_entities.c		\
 
 OBJ_GEN		=	$(SRC_GEN:.c=.o)
 
@@ -57,9 +76,11 @@ fclean: clean
 
 re:	fclean	all
 
-tests_run:$(OBJ_TESTS)
+tests_run: CFLAGS = -Wall -Wextra -Werror --coverage -lcriterion -I ./include
+
+tests_run:$(OBJ_SRC) $(OBJ_TESTS)
 	make -C ./lib tests_run
-	$(CC) $(OBJ_TESTS) -o $(NAME_TESTS) $(LIBFLAGS) $(LIBSYSTEM) $(TESTFLAGS)
+	$(CC) $(OBJ_TESTS) $(OBJ_SRC) -o $(NAME_TESTS) $(LIBFLAGS) $(LIBSYSTEM) $(TESTFLAGS)
 	./unit_tests
 
 generator:

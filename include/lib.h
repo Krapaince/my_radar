@@ -7,18 +7,23 @@
 
 #ifndef LIB_H_
     #define LIB_H_
-    #include <SFML/Graphics/CircleShape.h>
-    #include <SFML/Graphics/RenderWindow.h>
-    #include <SFML/Config.h>
     #include <math.h>
     #include <time.h>
     #include <stdlib.h>
+    #include <stdbool.h>
+    #include <stdio.h>
     #include <string.h>
     #include <limits.h>
+    #include <unistd.h>
+    #include <sys/stat.h>
+    #include <fcntl.h>
 
     //lib's function prototype
     int merge_str(char **s1, char *s2);
     int my_getnbr(char const *str);
+    void my_putchar(char c, int std);
+    void my_putnbr(int nb, int std);
+    void my_putstr(char const *str, int std);
     char *my_strcat(char *dest, char const *src);
     int my_strcmp(char const *s1, char const *s2);
     char *my_strcpy(char *dest, char const *src);

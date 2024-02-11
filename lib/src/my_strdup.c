@@ -12,6 +12,8 @@ char *my_strdup(char const *src)
     int len = my_strlen(src) + 1;
     char *dest;
 
+    if (!src)
+        return (NULL);
     if (!(dest = malloc(sizeof(*dest) * (len))))
         return (NULL);
     my_strcpy(dest, src);
