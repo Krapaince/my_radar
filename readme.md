@@ -6,7 +6,7 @@
 2D visualization panel showing a simulation of air traffic.
 
 ### Rules
-- Aircraft fly from a point A to a point B at a given speed
+- Aircraft flies from a point A to a point B at a given speed
 - If an aircraft collides with another one, the two aircrafts disappear
 - Control towers don’t move and have control areas
 - Control areas allow aircrafts to collide with each other without being destroyed
@@ -35,7 +35,7 @@
 | 4     | Orange  |
 
 ## Features
-### USER INTERACTIONS: (avaible every second)
+### USER INTERACTIONS: (available every second)
     'L'         enable/disabled hitboxes and areas
     'S'         enable/disabled sprites
     'B'         enable/disabled background
