@@ -1,0 +1,42 @@
+Script description:
+
+The map is defined by a 2d landmark which have his origin at the top left corner.
+The x-axis evolve from left to right. (--->)
+The y-axis evolve from top to bot. ( | )
+                                   ( | )
+                                   (\|/)
+
+
+Control towers:
+T x y radius
+| | |    |
+| | |    |-> The radius is a percentage depending on the size of the screen, this value is always greater than 0
+| | |-> Define the position on the y-axis
+| |-> Define the position on the x-axis
+|-> Represent a controll tower
+
+Aircraft:
+A x0 y0 x1 y1 V /_\t
+| |  |  |  |  |  |
+| |  |  |  |  |  |-> Time before the aircraft takes off is in second, this value is always greater than 0
+| |  |  |  |  |-> Define speed of the aircraft in pixel/second, the speed is always greater than 0
+| |  |  |  |-> Define the postion of the aircaft on the y-axis to the arrival
+| |  |  |-> Define the postion of the aircaft on the x-axis to the arrival
+| |  |-> Define the position of the aircraft on the y-axis to the departure
+| |-> Define the position of the aircraft on the x-axis to the departure
+|-> Represent an aircraft
+
+Entities: tower and aircraft
+Each entities are separated by a '\n' character.
+The tower position must be in the screen.
+The aircraft must land off and land on in the screen.
+The towers are described after the aircrafts.
+The file has only one empty line if there is no entities. However there must be zero empty line
+
+Example:
+
+A 3 4 2 5 4 5
+A 3 8 2 92 3 4
+A 4 5 65 21 4 6
+T 3 18 20
+T 300 48 23
