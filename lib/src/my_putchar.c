@@ -9,5 +9,8 @@
 
 void my_putchar(char c, int std)
 {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-result"
     write(std, &c, 1);
+#pragma GCC diagnostic pop
 }

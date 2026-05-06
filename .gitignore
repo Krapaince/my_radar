@@ -1,3 +1,5 @@
 gcovr/
 libmy.a
 *.o
+my_radar
+generator
