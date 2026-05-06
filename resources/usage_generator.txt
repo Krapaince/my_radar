@@ -2,26 +2,26 @@ NAME:
     generator  -  generates script for my radar
 
 SYSNOPSIS:
-    ./generator HELP
-    ./generator OPTION
+    ./generator -h
+    ./generator <script_name> [<name> <aircraft> <dt_a_min> <dt_a_max> <speed_min> <speed_max> <tower> <radius_min> <radius_max>]
 
 HELP:
     -h                  printf the usage and quit
 
-OPTION: the option must be sort in the following order
+ARGUMENTS: the option must be sort in the following order
                                                                                 | Default
     AIRCRAFT:                                                                   |
-        -n --name           Output file name                                    | my_radar_script
-        -a --aircraft       Number 0f aircraft                                  | 100
-        --dt_a_min          The minimum of time before an aircraft take off     | 0
-        --dt_a_max          The minimum time before an aircraft take off        | 10
-        --speed_min         Minimal speed of an aircraft                        | 10
-        --speed_max         Maximum speed of an aircraft                        | 100
+        name           Output file name                                         | my_radar_script
+        aircraft       Number 0f aircraft                                       | 100
+        dt_a_min          The minimum of time before an aircraft take off       | 0
+        dt_a_max          The minimum time before an aircraft take off          | 10
+        speed_min         Minimal speed of an aircraft                          | 10
+        speed_max         Maximum speed of an aircraft                          | 100
                                                                                 |
     TOWER                                                                       |
-        -t --tower          Number of tower                                     | 0
-        --radius_min        Minimal radius of a tower                           | 5
-        --radius_max        Maximal radius of a tower                           | 10
+        tower          Number of tower                                          | 0
+        radius_min        Minimal radius of a tower                             | 5
+        radius_max        Maximal radius of a tower                             | 10
 
 NOTE:
     0 <= number_aircraft
